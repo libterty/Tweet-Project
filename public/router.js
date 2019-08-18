@@ -1,5 +1,4 @@
 import Twit from 'twit'
-
 const express = require('express')
 export const router = express.Router()
 
@@ -20,14 +19,13 @@ router.get('/tweets/:search', (req, res) => {
   ) {
     if (err) {
       console.log(err)
-    }
-    if (!err) {
+    } else {
       res.json(data)
     }
   })
 })
 
-router.get('/comment/', (req, res) => {
+router.post('/comment/', (req, res) => {
   console.log(req.body.comment)
   T.post('statuses/update', { status: req.body.comment }, function(
     err,
@@ -35,7 +33,9 @@ router.get('/comment/', (req, res) => {
     response
   ) {
     if (err) {
+      console.log(err)
     } else {
+      res.json(req.body.comment)
     }
   })
 })

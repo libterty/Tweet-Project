@@ -23,7 +23,7 @@
         getTweetbtn.addEventListener('click', getAllTweets)
 
         function getAllTweets() {
-            const url = '/tweets/' + search.value;
+            const url = '/tweets/' + search.value
             fetch(url).then((response) => {
                 return response.json()
             }).then((data) => {
@@ -40,7 +40,7 @@
                 let hyper = `<a href="https://twitter.com/i/web/status/${item.id_str}" target="_blank">${item.text}</a>`
                 let li = document.createElement('li')
                 let span = document.createElement('span')
-                span.innerHTML = `${hyper}<small>${item.user.name}</small>`
+                span.innerHTML = `${hyper}<small>${item.user.name}</small>${item.retweet_count}`
                 li.appendChild(span)
                 output.appendChild(li)
             })
