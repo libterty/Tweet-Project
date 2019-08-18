@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tweet Poject</title>
+</head>
+
+<body>
+    <input type="text" id="search" value="" placeholder="Search Term" />
+    <button id="getTweetbtn">Search Tweets</button>
+
+    <ul id="output"></ul>
+
+    <script>
+        const search = document.getElementById('search')
+        const getTweetbtn = document.getElementById('getTweetbtn')
+        const output = document.getElementById('output')
+
+        getTweetbtn.addEventListener('click', getAllTweets)
+
+        function getAllTweets() {
+            const url = '/tweets/' + search.value;
+            fetch(url).then((response) => {
+                return response.json()
+            }).then((data) => {
+                outputTweets(data.statuses)
+            }).catch((error) => {
+                console.log(JSON.stringify(error))
+            })
+        }
+
+        function outputTweets(data) {
+            output.innerHTML = ''
+            data.forEach(function(item, i) {
+                console.log(item)
+                let hyper = `<a href="https://twitter.com/i/web/status/${item.id_str}" target="_blank">${item.text}</a>`
+                let li = document.createElement('li')
+                let span = document.createElement('span')
+                span.innerHTML = `${hyper}<small>${item.user.name}</small>`
+                li.appendChild(span)
+                output.appendChild(li)
+            })
+            console.log(data)
+        }
+    </script>
+</body>
+
+</html>

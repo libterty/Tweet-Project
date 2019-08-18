@@ -1,0 +1,36 @@
+{
+    "name": "tweetproj",
+    "version": "1.0.0",
+    "description": "Tweet API",
+    "main": "index.js",
+    "module": "app.js",
+    "scripts": {
+        "start": "nodemon index.js",
+        "lint": "eslint --format table --fix ."
+    },
+    "private": true,
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "esm": "^3.2.25",
+        "express": "^4.17.1",
+        "nodemon": "^1.19.1",
+        "twit": "^2.2.11"
+    },
+    "devDependencies": {
+        "eslint": "^6.1.0",
+        "eslint-config-prettier": "^6.0.0",
+        "eslint-config-standard": "^13.0.1",
+        "eslint-plugin-import": "^2.18.2",
+        "eslint-plugin-node": "^9.1.0",
+        "eslint-plugin-prettier": "^3.1.0",
+        "eslint-plugin-promise": "^4.2.1",
+        "eslint-plugin-standard": "^4.0.0",
+        "prettier": "^1.18.2"
+    },
+    "prettier": {
+        "semi": false,
+        "userTabs": true,
+        "singleQuote": true
+    }
+}
