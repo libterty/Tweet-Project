@@ -10,12 +10,24 @@
 </head>
 
 <body>
-    <form action="/comment/" method="post" id="newSend">
-        <label for="newMessage">
-            <input type="text" name="newMessage" id="newMessage"></input>
-        </label>
-        <button type="submit">Post to Twitter</button>
-    </form>
+    <div class="container">
+        <form action="/comment/" method="post" id="sendComment">
+            <label for="newMessage"> Update with comment
+                <input type="text" name="newMessage" id="newMessage" placeholder="place your comment"></input>
+            </label>
+            <button type="submit">Post to Twitter</button>
+        </form>
+    </div>
+
+    <div class="conatiner">
+        <form action="/upload/" method="post" id="sendPicwithCom">
+            <label for="newMsgandPic"> Update with comment and photo
+                <input type="text" name="newMsg" id="newMsg" placeholder="place your comment"></input>
+                <input type="file" name="newImage" id="newImage" placeholder="place your photo" accept=".jpg, .jpeg, .png"></input>
+            </label>
+            <button type="submit">Post to Twitter</button>
+        </form>
+    </div>
 
     <input type="text" id="search" value="" placeholder="Search Term" />
     <button id="getTweetbtn">Search Tweets</button>
@@ -26,9 +38,11 @@
         const search = document.getElementById('search')
         const getTweetbtn = document.getElementById('getTweetbtn')
         const output = document.getElementById('output')
-        const newSend = document.getElementById('newSend')
+        const sendPicwithCom = document.getElementById('sendPicwithCom')
+        const sendComment = document.getElementById('sendComment')
 
-        newSend.addEventListener('submit', getTwitComments)
+        sendComment.addEventListener('submit', getTwitComments)
+        sendPicwithCom.addEventListener('submit', getTwitPicandCom)
         getTweetbtn.addEventListener('click', getAllTweets)
 
         function getTwitComments() {
@@ -41,6 +55,28 @@
 
             var xhr = new XMLHttpRequest()
             xhr.open('POST', '/comment/', true)
+            xhr.setRequestHeader('Content-Type', 'application/json')
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState != 4 || xhr.status != 200) {
+                    return
+                }
+                console.log(xhr.responseText)
+            }
+            xhr.send(JSON.stringify(newComment))
+        }
+
+        function getTwitPicandCom() {
+            const commentVal = document.getElementById('newMsg').value
+            const imageVal = document.getElementById('newImage').files[0].name
+            event.preventDefault()
+
+            let newComment = {
+                "comment": commentVal,
+                "image": imageVal
+            }
+
+            var xhr = new XMLHttpRequest()
+            xhr.open('POST', '/upload/', true)
             xhr.setRequestHeader('Content-Type', 'application/json')
             xhr.onreadystatechange = function() {
                 if (xhr.readyState != 4 || xhr.status != 200) {
