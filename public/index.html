@@ -10,6 +10,13 @@
 </head>
 
 <body>
+    <form action="/comment/" method="post" id="newSend">
+        <label for="newMessage">
+            <input type="text" name="newMessage" id="newMessage"></input>
+        </label>
+        <button type="submit">Post to Twitter</button>
+    </form>
+
     <input type="text" id="search" value="" placeholder="Search Term" />
     <button id="getTweetbtn">Search Tweets</button>
 
@@ -19,8 +26,30 @@
         const search = document.getElementById('search')
         const getTweetbtn = document.getElementById('getTweetbtn')
         const output = document.getElementById('output')
+        const newSend = document.getElementById('newSend')
 
+        newSend.addEventListener('submit', getTwitComments)
         getTweetbtn.addEventListener('click', getAllTweets)
+
+        function getTwitComments() {
+            const commentVal = document.getElementById('newMessage').value
+            event.preventDefault()
+
+            let newComment = {
+                "comment": commentVal
+            }
+
+            var xhr = new XMLHttpRequest()
+            xhr.open('POST', '/comment/', true)
+            xhr.setRequestHeader('Content-Type', 'application/json')
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState != 4 || xhr.status != 200) {
+                    return
+                }
+                console.log(xhr.responseText)
+            }
+            xhr.send(JSON.stringify(newComment))
+        }
 
         function getAllTweets() {
             const url = '/tweets/' + search.value

@@ -4,7 +4,7 @@ Using express to get tweets api and post content, the following instruction will
 
 ## Features
 - Allow you to search information from Twitter
-- Allow you to post twitter using 
+- Allow you to post twitter using either POSTMAN or our frontend page
 
 ## Environment Setup
 1. Node.js
@@ -23,10 +23,12 @@ you can sign up your Twitter Developer account through the link
 https://developer.twitter.com
 ```
 
-In order to post Twitters into Twitter, your will need postman to help you post. In the future version, postman will be optional. We'll have a webpage allows you to posting through web page or terminal commands. The following will take you to postman website where you can download postman.
+In order to post Twitters into Twitter, your will need postman to help you post. The following will take you to postman website where you can download postman.
 ```bash
 https://www.getpostman.com
 ```
+Or you can use our frontend website to post your comments into your Twitter account.
+
 
 ## How to use
 Run the script
@@ -35,6 +37,7 @@ npm start
 ```
 
 You will see a Home page like this
+![image](https://github.com/libterty/Tweet-Project/blob/master/public/assets/images/Homepage.png)
 
 ## Testing and Debugging
 The following command is a settup for eslint which aslo includs prettier inside. It allows you to fix bugs and formatting your code to look nicer.
